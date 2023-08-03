@@ -32,6 +32,4 @@ public class Movie {
     private String url;
     @ElementCollection
     private Set<Long>  comments;
-
-
 }
