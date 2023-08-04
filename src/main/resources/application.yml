@@ -4,7 +4,7 @@ spring:
   datasource:
     username: postgres
     password: root
-    url: jdbc:postgresql://localhost:5432/java10MovieDb
+    url: jdbc:postgresql://localhost:5432/java10MovieDb2
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true

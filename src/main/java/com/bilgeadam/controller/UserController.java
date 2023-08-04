@@ -1,12 +1,17 @@
 package com.bilgeadam.controller;
 
+import com.bilgeadam.dto.request.LoginRequestDto;
 import com.bilgeadam.dto.request.RegisterRequestDto;
+import com.bilgeadam.dto.response.UserResponseDto;
 import com.bilgeadam.repository.entity.User;
 import com.bilgeadam.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 import  static com.bilgeadam.constant.RestApiUrl.*;
 
 @RestController
@@ -57,7 +62,44 @@ public class UserController {
         if (id==null){
             throw new RuntimeException("id null");
         }
-
         return ResponseEntity.ok(userService.findById(id));
+    }
+
+    @PostMapping(LOGIN)
+    public ResponseEntity<UserResponseDto> login(@RequestBody LoginRequestDto dto){
+
+        return ResponseEntity.ok(userService.login(dto));
+    }
+
+    @GetMapping("/orderbyname")
+    public ResponseEntity<List<User>> findAllByOrderByName(){
+        return  ResponseEntity.ok( userService.findAllByOrderByName());
+    }
+
+    @GetMapping("/contaningbyname")
+    public  ResponseEntity< List<UserResponseDto>> findAllByNameContainingIgnoreCase(String value){
+
+        return ResponseEntity.ok(userService.findAllByNameContainingIgnoreCase(value));
+    }
+    @GetMapping("/contaningbyemail")
+    public  ResponseEntity< List<User>> findAllByEmailContainingIgnoreCase(String value){
+    return  ResponseEntity.ok(userService.findAllByEmailContainingIgnoreCase(value));
+    }
+
+    @GetMapping("/email_ending_with")
+    public  ResponseEntity< List<User>> findAllByEmailEndingWith(String value){
+        return  ResponseEntity.ok(userService.findAllByEmailEndingWith(value));
+    }
+    @GetMapping("/lt_password")
+    public  ResponseEntity< List<User>> passwordLongerThan(int value){
+        return ResponseEntity.ok(userService.passwordLongerThan(value));
+    }
+    @GetMapping("/lt_password2")
+    public  ResponseEntity< List<User>> passwordLongerThan2(int value){
+        return ResponseEntity.ok(userService.passwordLongerThan2(value));
+    }
+    @GetMapping("/lt_password3")
+    public  ResponseEntity< List<User>> passwordLongerThan3(int value){
+        return ResponseEntity.ok(userService.passwordLongerThan3(value));
     }
 }
